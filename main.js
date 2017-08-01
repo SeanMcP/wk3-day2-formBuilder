@@ -105,19 +105,34 @@ for (var i = 0; i < formData.length; i++) {
     textarea.setAttribute("placeholder", formData[i].label);
     textarea.id = formData[i].id;
     divFields.appendChild(textarea);
-    console.log("textarea: ", textarea);
   } else if (formData[i].type === "select") {
 
     let select = document.createElement("select");
     select.setAttribute("type", formData[i].type);
     select.setAttribute("value", formData[i].label);
-    select.setAttribute("class", formData[i].icon);
+
     select.id = formData[i].id;
-    divFields.appendChild(select);
+
+    let inputGroup = document.createElement("div");
+    inputGroup.setAttribute("class", "input-group");
+
+    let inputAddon = document.createElement("span");
+    inputAddon.setAttribute("class", "input-group-addon");
+
+    let faTag = document.createElement("i");
+    faTag.setAttribute("class", "fa " + formData[i].icon);
+    faTag.setAttribute("aria-hidden", "true");
+
+    inputAddon.appendChild(faTag);
+    inputGroup.appendChild(inputAddon);
+    inputGroup.appendChild(select);
+
+    divFields.appendChild(inputGroup);
+
+    // divFields.appendChild(select);
     let selectPlaceholder = document.createElement("option");
     selectPlaceholder.textContent = "Select language...";
     select.appendChild(selectPlaceholder);
-    console.log("select: ", select);
 
     for (var j = 0; j < formData[i].options.length; j++) {
       let option = document.createElement("option");
@@ -125,7 +140,6 @@ for (var i = 0; i < formData.length; i++) {
 
       option.setAttribute("value", formData[i].options[j].value);
       select.appendChild(option);
-      console.log("option: ", option);
     }
   } else {
     let input = document.createElement("input");
@@ -133,7 +147,21 @@ for (var i = 0; i < formData.length; i++) {
     input.setAttribute("placeholder", formData[i].label);
     input.setAttribute("class", formData[i].icon);
     input.id = formData[i].id;
-    divFields.appendChild(input);
-    console.log("input: ", input);
+
+    let inputGroup = document.createElement("div");
+    inputGroup.setAttribute("class", "input-group");
+
+    let inputAddon = document.createElement("span");
+    inputAddon.setAttribute("class", "input-group-addon");
+
+    let faTag = document.createElement("i");
+    faTag.setAttribute("class", "fa " + formData[i].icon);
+    faTag.setAttribute("aria-hidden", "true");
+
+    inputAddon.appendChild(faTag);
+    inputGroup.appendChild(inputAddon);
+    inputGroup.appendChild(input);
+
+    divFields.appendChild(inputGroup);
   }
 }
